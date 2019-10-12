@@ -1,26 +1,5 @@
-(* let () =
-	let new_map = [E; E; E; E; E; E; E; E; E] in
-	let different_map = [E; X; E; E; O; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
-	print_board board; *)
-
-(* let () =
-	match checkBoard ([
-[X;X;X; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-]) with | _ -> () *)
-
 open InputParser
 open TalonStuff
-(* open XenoStuff *)
 open TicTac
 
 let place_map token pos map =
@@ -33,15 +12,18 @@ let place_board board token (x, y) =
 
 let rec main board pl =
 	print_board board;
+	begin
+	match pl with
+	| O -> print_string "O's turn to play.\n"
+	| X -> print_string "X's turn to play.\n"
+	end;
 	let input = get_input () in
-
 	let new_board = place_board board pl input in
-	main new_board pl
+	main new_board (if pl = O then X else O)
 
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
-	let different_map = [E; X; E; E; O; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
+	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
 
-	main board X;
+	main board O;
 	()

@@ -25,7 +25,7 @@ let rec main board pl =
 		end
 	else
 		begin
-			checkBoard new_board;
+			let new_board = checkBoard new_board in
 			print_char '\n';
 			print_board new_board;
 			print_char '\n';

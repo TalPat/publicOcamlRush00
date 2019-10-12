@@ -11,6 +11,6 @@
 # **************************************************************************** #
 
 RESULT		=	tictac
-SOURCES		=	src/tictac.ml src/input_parser.ml
+SOURCES		=	src/TicTac.ml src/InputParser.ml extras/TalonStuff.ml src/main.ml
 
 include OCamlMakefile

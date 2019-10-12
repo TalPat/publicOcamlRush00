@@ -49,7 +49,7 @@ let checkBoard b =
 	in
 	aux b 0
 
-let () =
+(* let () =
 	match checkBoard ([
 [X;X;X; E;E;E; E;E;E];
 [E;E;E; E;E;E; E;E;E];
@@ -61,7 +61,7 @@ let () =
 [E;E;E; E;E;E; E;E;E];
 [E;E;E; E;E;E; E;E;E];
 [E;E;E; E;E;E; E;E;E];
-]) with | _ -> ()
+]) with | _ -> () *)
 		
 (* test list:
 [

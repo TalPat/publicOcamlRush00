@@ -36,12 +36,13 @@ let rec main board pl =
 	let input = get_input () in
 
 	let new_board = place_board board pl input in
-	main new_board pl
+	let new_board1 = checkBoard new_board in
+	main new_board1 pl
 
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let different_map = [E; X; E; E; O; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
+	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map; new_map] in
 
 	main board X;
 	()

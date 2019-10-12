@@ -43,15 +43,13 @@ let print_3_maps map1 map2 map3 =
 let rec print_board board =
 	match board with
 	| [x] -> ()
-	| first::second::third::tail ->
-		print_3_maps first second third;
+	| head::tail ->
 		match tail with
-		| [y] -> ();
-		| h::t -> print_endline "---------------------";
-		print_board tail
-
-(* let () =
-	let new_map = [E; E; E; E; E; E; E; E; E] in
-	let different_map = [E; X; E; E; O; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
-	print_board board; *)
+		| [y] -> ()
+		| _ -> match head::tail with
+			| first::second::third::tail ->
+				print_3_maps first second third;
+				match tail with
+				| [] -> ();
+				| h::t -> print_endline "---------------------";
+				print_board tail

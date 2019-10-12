@@ -48,32 +48,3 @@ let checkBoard b =
 			else aux b (i+1)
 	in
 	aux b 0
-
-(* let () =
-	match checkBoard ([
-[X;X;X; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-]) with | _ -> () *)
-		
-(* test list:
-[
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-[E;E;E; E;E;E; E;E;E];
-] 
-*)

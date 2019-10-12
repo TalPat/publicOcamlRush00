@@ -3,6 +3,10 @@ type map = ( row * row * row )
 type map_row = ( map * map * map )
 type board = ( map_row * map_row * map_row )
 
+(* type token = X | O | E
+type map = token list
+type board = map list *)
+
 let print_row row =
 	let (a, b, c) = row in
 	print_char a; print_char ' ';

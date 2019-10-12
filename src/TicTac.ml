@@ -46,7 +46,8 @@ let rec print_board board =
 	| head::tail ->
 		match tail with
 		| [] -> ()
-		| _ -> match head::tail with
+		| _ ->
+			match head::tail with
 			| first::second::third::tail ->
 				print_3_maps first second third;
 				match tail with

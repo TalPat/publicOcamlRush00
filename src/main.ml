@@ -19,11 +19,12 @@ let rec main board pl =
 	end;
 	let input = get_input () in
 	let new_board = place_board board pl input in
+	checkBoard new_board;
 	main new_board (if pl = O then X else O)
 
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
+	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
 
 	main board O;
 	()

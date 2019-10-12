@@ -42,13 +42,13 @@ let print_3_maps map1 map2 map3 =
 
 let rec print_board board =
 	match board with
+	| [] -> ()
 	| first::second::third::tail ->
 		print_3_maps first second third;
 		match tail with
 		| [] -> ();
 		| h::t -> print_endline "---------------------";
 		print_board tail
-	| [] -> ()
 
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in

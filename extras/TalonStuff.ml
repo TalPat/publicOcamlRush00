@@ -5,6 +5,9 @@ type board = map list
 let replace l pos a =
 	List.mapi (fun i x -> if i = pos then a else x) l
 
+let replace_all token map =
+	List.map (fun x -> token ) map
+
 let checkMap m = 
 	let winCon = [
 		(0, 1, 2);
@@ -40,10 +43,12 @@ let checkBoard b =
 				match checkMap (List.nth b i) with
 					| X ->
 						print_endline ("X wins grid " ^ (string_of_int i));
-						replace b 9 (replace (List.nth b 9) i X)
+						let b = replace b 9 (replace (List.nth b 9) i X) in
+						replace b i (replace_all X (List.nth b i))
 					| O ->
 						print_endline ("O wins grid " ^ (string_of_int i));
-						replace b 9 (replace (List.nth b 9) i O)
+						let b = replace b 9 (replace (List.nth b 9) i O) in
+						replace b i (replace_all O (List.nth b i))
 			end
 			else aux b (i+1)
 	in

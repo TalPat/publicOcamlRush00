@@ -21,7 +21,7 @@ let split_str input = (*Splits string and gets int values from elemnts*)
 	let p_num = get_nth_int str_list 1 in
 	(m_num, p_num)
 
-let get_input = (*Returns a tuple of 2 integers of the input*)
+let get_input = (*Returns a tuple of 2 integers of the input loops until input is correct*)
 	let input = read_line() in
 	let rec loop (m_num, p_num)=
 		if (m_num < 0 || m_num > 9 || p_num < 0 || p_num > 9) then

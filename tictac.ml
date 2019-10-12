@@ -1,25 +1,36 @@
-let rec print_map lst width height =
-	let rec print_row lst_ w =
-		if w = 0 then
-			begin
-				print_char '\n';
-				lst_
-			end
-		else
-			match lst_ with
-			| [] -> lst_
-			| head::tail ->
-				print_char head;
-				print_row tail (w - 1)
-	in
-	if height > 0 then
-		let new_list = print_row lst width in
-		print_map new_list width (height - 1)
+type row = ( char * char * char)
+type map = { a : row; b : row; c : row }
+
+let print_row row =
+	let (a, b, c) = row in
+	print_char a; print_char ' ';
+	print_char b; print_char ' ';
+	print_char c
+
+let rec print_map map height =
+	if height = 3 then
+		begin
+		print_row map.a;
+		print_char '\n';
+		print_map map (height - 1)
+		end
+	else if height = 2 then
+		begin
+		print_row map.b;
+		print_char '\n';
+		print_map map (height - 1)
+		end
+	else if height = 1 then
+		begin
+		print_row map.c;
+		print_char '\n';
+		print_map map (height - 1)
+		end
 	else
 		()
 
 let () =
-	(* let map = ['-'; '-'; '-'; '-'; '-'; '-'; '-'; '-'; '-';] in
-	print_map map 3 3 *)
-	let input = read_line () in
-	print_endline input
+	let new_row = ( '-', '-', '-' ) in
+	let new_map = { a = new_row; b = new_row; c = new_row } in
+
+	print_map new_map 3

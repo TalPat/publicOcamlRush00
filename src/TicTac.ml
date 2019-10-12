@@ -1,6 +1,4 @@
-type token = X | O | E
-type map = token list
-type board = map list
+open TalonStuff
 
 let rec print_map_row map first last count =
 	if count < first then
@@ -52,8 +50,8 @@ let rec print_board board =
 		| h::t -> print_endline "---------------------";
 		print_board tail
 
-let () =
+(* let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let different_map = [E; X; E; E; O; E; E; E; E] in
 	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
-	print_board board;
+	print_board board; *)

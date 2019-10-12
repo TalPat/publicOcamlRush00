@@ -1,81 +1,59 @@
-type row = ( char * char * char)
-type map = ( row * row * row )
-type map_row = ( map * map * map )
-type board = ( map_row * map_row * map_row )
-
-(* type token = X | O | E
+type token = X | O | E
 type map = token list
-type board = map list *)
+type board = map list
 
-let print_row row =
-	let (a, b, c) = row in
-	print_char a; print_char ' ';
-	print_char b; print_char ' ';
-	print_char c
-
-let rec print_map_row map_row y =
-	let (map_a, map_b, map_c) = map_row in
-	if y = 3 then
-		begin
-		let (a, _, _) = map_a in
-		let (b, _, _) = map_b in
-		let (c, _, _) = map_c in
-		print_row a;
-		print_string " | ";
-		print_row b;
-		print_string " | ";
-		print_row c;
-		print_char '\n';
-		print_map_row map_row (y - 1)
-		end
-	else if y = 2 then
-		begin
-		let (_, a, _) = map_a in
-		let (_, b, _) = map_b in
-		let (_, c, _) = map_c in
-		print_row a;
-		print_string " | ";
-		print_row b;
-		print_string " | ";
-		print_row c;
-		print_char '\n';
-		print_map_row map_row (y - 1)
-		end
-	else if y = 1 then
-		begin
-		let (_, _, a) = map_a in
-		let (_, _, b) = map_b in
-		let (_, _, c) = map_c in
-		print_row a;
-		print_string " | ";
-		print_row b;
-		print_string " | ";
-		print_row c;
-		print_char '\n';
-		print_map_row map_row (y - 1)
-		end
+let rec print_map_row map first last count =
+	if count < first then
+		match map with
+		| [] -> ()
+		| head::tail -> print_map_row tail first last (count + 1)
+	else if first <= last then
+		match map with
+		| [] -> ()
+		| head::tail ->
+			begin
+				match head with
+				| X -> print_char 'X'
+				| O -> print_char 'O'
+				| _ -> print_char '-'
+			end;
+			print_char ' ';
+			print_map_row tail (first + 1) last (count + 1)
 	else
 		()
 
+let print_3_maps map1 map2 map3 =
+	print_map_row map1 1 3 1;
+	print_string "| ";
+	print_map_row map2 1 3 1;
+	print_string "| ";
+	print_map_row map3 1 3 1;
+	print_char '\n';
+	print_map_row map1 4 6 1;
+	print_string "| ";
+	print_map_row map2 4 6 1;
+	print_string "| ";
+	print_map_row map3 4 6 1;
+	print_char '\n';
+	print_map_row map1 7 9 1;
+	print_string "| ";
+	print_map_row map2 7 9 1;
+	print_string "| ";
+	print_map_row map3 7 9 1;
+	print_char '\n'
+
+let rec print_board board =
+	match board with
+	| [] -> ()
+	| first::second::third::tail ->
+		print_3_maps first second third;
+		match tail with
+		| [] -> ();
+		| h::t -> print_endline "---------------------";
+		print_board tail
+
 let () =
-	let new_row = ( '-', '-', '-' ) in
-	let new_map = (new_row, new_row, new_row) in
-	let map1 = new_map in
-	let map2 = new_map in
-	let map3 = new_map in
-	let map4 = new_map in
-	let map5 = new_map in
-	let map6 = new_map in
-	let map7 = new_map in
-	let map8 = new_map in
-	let map9 = new_map in
-
-	let map_row_1 = (map1, map2, map3) in
-	let map_row_2 = (map4, map5, map6) in
-	let map_row_3 = (map7, map8, map9) in
-
-	print_map_row map_row_1 3;
-	print_endline "---------------------";
-	print_map_row map_row_2 3;
-	print_endline "---------------------";
-	print_map_row map_row_3 3
+	let new_map = [E; E; E; E; E; E; E; E; E] in
+	let different_map = [E; X; E; E; O; E; E; E; E] in
+	let board = [new_map; new_map; new_map; new_map; different_map; new_map; new_map; new_map; new_map] in
+	print_board board;

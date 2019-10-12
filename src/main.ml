@@ -33,7 +33,7 @@ let rec main board pl =
 		end
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
-	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
+	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
 	print_board board;
 	print_char '\n';
 	main board O;

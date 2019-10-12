@@ -46,10 +46,17 @@ let rec print_board board =
 	| head::tail ->
 		match tail with
 		| [] -> ()
-		| _ -> match head::tail with
+		| _ ->
+			match head::tail with
 			| first::second::third::tail ->
 				print_3_maps first second third;
 				match tail with
 				| [] -> ();
-				| h::t -> print_endline "---------------------";
-				print_board tail
+				| h::t ->
+					match t with
+					| [] -> ();
+					| _ ->
+						begin
+							print_endline "---------------------";
+							print_board tail
+						end

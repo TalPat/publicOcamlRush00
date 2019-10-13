@@ -1,10 +1,21 @@
 
 let get_player_names () = 
-    print_string ("|-----Enter Player One's Name-----|\n             ");
-    let pl_one_name = read_line() in
-    print_string ("|-----Enter Player Two's Name-----|\n             ");
-    let pl_two_name = read_line() in
-    (pl_one_name, pl_two_name)
+    let rec loop new_name =
+      if (String.trim new_name) = "" then
+      loop (read_line ())
+      else new_name in
+    print_string ("|-----Enter Player One's Name-----|\n            ");
+    let pl_one_name = loop (read_line ()) in
+  
+    print_string ("|-----Enter Player Two's Name-----|\n            ");
+    let rec pl_two_name new_name pl1_name = 
+      if new_name  = pl1_name then
+        pl_two_name (loop (read_line ())) pl1_name
+      else
+        new_name
+    in
+  
+    (pl_one_name, pl_two_name (read_line ()) pl_one_name)
 
 let new_menu () =
   print_string "|-----------Main Menu------------|\n Select an option:\n  1)  Player vs Player (PP)\n  2)  Player vs IA     (IA)\n            " ;

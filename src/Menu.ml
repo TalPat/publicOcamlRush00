@@ -18,15 +18,17 @@ let get_player_names () =
     (pl_one_name, pl_two_name (read_line ()) pl_one_name)
 
 let new_menu () =
-  print_string "|-----------Main Menu------------|\n Select an option:\n  1)  Player vs Player (PP)\n  2)  Player vs IA     (IA)\n            " ;
+  print_string "|-----------Main Menu------------|\n Select an option:\n  1)  Player vs Player (PP)\n  2)  Player vs IA     (IA)\n  2)  IA vs IA         (IAAI)\n           " ;
   let rec loop input =
     if (input = "PP" ) then
       get_player_names ()
     else if (input = "IA") then
       ("IA", "Player")
+    else if (input = "IAAI") then
+      ("IA1", "IA2")
     else
       begin
-      print_string ("Please type either (PP) or (IA)\n            ");
+      print_string ("Please type either (PP) or (IA) or (IAAI)\n            ");
       loop (read_line())
       end in
   loop (read_line())

@@ -37,10 +37,12 @@ let rec iaMain board pl =
 
 			if checkGameOver new_board != E
 			then begin
+				begin
 				match checkGameOver new_board with
 					| X -> print_endline "X wins";
 					| O -> print_endline "O wins";
 					| _ -> print_endline "Stalemate";
+				end;
 					if yesNo () = "Y"
 					then
 						newGame ()
@@ -74,10 +76,12 @@ and main board pl (name1, name2)=
 
 			if checkGameOver new_board != E
 			then begin
+				begin
 				match checkGameOver new_board with
 					| X -> print_endline "X wins";
 					| O -> print_endline "O wins";
 					| _ -> print_endline "Stalemate";
+				end;
 					if yesNo () = "Y"
 					then
 						newGame ()
@@ -88,6 +92,46 @@ and main board pl (name1, name2)=
 			main new_board (if pl = O then X else O) (name1, name2)
 		end
 
+and iaaiMain board pl =
+	begin
+		match pl with
+		| O -> print_string "O's turn to play.\n"
+		| _ -> print_string "X's turn to play.\n"
+	end;
+	let input = placeToken (pl, 0) board
+	in
+	let new_board = place_board board pl input in
+	if (board = new_board) then
+		begin	
+			print_string "Invalid placement\n";
+			iaMain board pl
+		end
+	else
+		begin
+			let new_board = checkBoard new_board in
+			print_char '\n';
+			print_board new_board;
+			print_char '\n';
+
+			if checkGameOver new_board != E
+			then begin
+				begin
+				match checkGameOver new_board with
+					| X -> print_endline "X wins";
+					| O -> print_endline "O wins";
+					| _ -> print_endline "Stalemate";
+				end;
+					if yesNo () = "Y"
+					then
+						newGame ()
+					else
+						exit 0
+			end
+			else begin
+				iaaiMain new_board (if pl = O then X else O)
+			end
+		end
+
 and newGame () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
@@ -96,6 +140,8 @@ and newGame () =
 	print_char '\n';
 	if name1 = "IA"
 	then iaMain board O
+	else if name1 = "IA1"
+	then iaaiMain board O
 	else main board O (name1, name2);
 	()
 

@@ -52,18 +52,18 @@ let rec iaMain board pl =
 			iaMain new_board (if pl = O then X else O)
 		end
 
-and main board pl =
+and main board pl (name1, name2)=
 	begin
 	match pl with
-	| O -> print_string "O's turn to play.\n"
-	| _ -> print_string "X's turn to play.\n"
+	| O -> print_string (name1^"'s turn to play.\n")
+	| X -> print_string (name2^"'s turn to play.\n")
 	end;
 	let input = get_input () in
 	let new_board = place_board board pl input in
 	if (board = new_board) then
 		begin	
 			print_string "Invalid placement\n";
-			main board pl
+			main board pl (name1, name2)
 		end
 	else
 		begin
@@ -85,8 +85,7 @@ and main board pl =
 						exit 0
 			end
 			else
-
-			main new_board (if pl = O then X else O)
+			main new_board (if pl = O then X else O) (name1, name2)
 		end
 
 and newGame () =
@@ -97,7 +96,8 @@ and newGame () =
 	print_char '\n';
 	if name1 = "IA"
 	then iaMain board O
-	else main board O
+	else main board O (name1, name2);
+	()
 
 let () =
 	newGame ()

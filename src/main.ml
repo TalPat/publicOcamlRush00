@@ -14,8 +14,8 @@ let place_board board token (x, y) =
 let rec iaMain board pl =
 	begin
 	match pl with
-	| O -> print_string "O's turn to play.\n"
-	| _ -> print_string "X's turn to play.\n"
+	| O -> print_string "IA's (O) turn to play.\n"
+	| _ -> print_string "Your (X) turn to play.\n"
 	end;
 	let input =
 		if pl = X
@@ -55,8 +55,8 @@ let rec iaMain board pl =
 and main board pl (name1, name2)=
 	begin
 	match pl with
-	| O -> print_string (name1^"'s turn to play.\n")
-	| X -> print_string (name2^"'s turn to play.\n")
+	| O -> print_string (name1^"'s (O) turn to play.\n")
+	| X -> print_string (name2^"'s (X) turn to play.\n")
 	end;
 	let input = get_input () in
 	let new_board = place_board board pl input in

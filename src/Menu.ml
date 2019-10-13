@@ -18,7 +18,7 @@ let get_player_names () =
     (pl_one_name, pl_two_name (read_line ()) pl_one_name)
 
 let new_menu () =
-  print_string "|-----------Main Menu------------|\n Select an option:\n  1)  Player vs Player (PP)\n  2)  Player vs IA     (IA)\n  2)  IA vs IA         (IAAI)\n           " ;
+  print_string "|-----------Main Menu------------|\n Select an option:\n  1)  Player vs Player (PP)\n  2)  Player vs IA     (IA)\n  3)  IA vs IA         (IAAI)\n           " ;
   let rec loop input =
     if (input = "PP" ) then
       get_player_names ()

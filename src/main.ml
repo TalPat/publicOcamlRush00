@@ -6,7 +6,7 @@ open Menu
 let place_map token pos map =
 		match token with
 		| X -> List.mapi (fun i x -> if i = (pos-1) && x = E then X else x) map
-		| O -> List.mapi (fun i x -> if i = (pos-1) && x = E then O else x) map
+		| _ -> List.mapi (fun i x -> if i = (pos-1) && x = E then O else x) map
 
 let place_board board token (x, y) =
 	List.mapi (fun i a -> if i = (x - 1) then place_map token y a else a) board
@@ -15,7 +15,7 @@ let rec iaMain board pl =
 	begin
 	match pl with
 	| O -> print_string "O's turn to play.\n"
-	| X -> print_string "X's turn to play.\n"
+	| _ -> print_string "X's turn to play.\n"
 	end;
 	let input =
 		if pl = X
@@ -34,14 +34,29 @@ let rec iaMain board pl =
 			print_char '\n';
 			print_board new_board;
 			print_char '\n';
+
+			if checkGameOver new_board != E
+			then begin
+				match checkGameOver new_board with
+					| X -> print_endline "X wins";
+					| O -> print_endline "O wins";
+					| _ -> print_endline "Stalemate";
+					if yesNo () = "Y"
+					then
+						newGame ()
+					else
+						exit 0
+			end
+			else
+
 			iaMain new_board (if pl = O then X else O)
 		end
 
-let rec main board pl =
+and main board pl =
 	begin
 	match pl with
 	| O -> print_string "O's turn to play.\n"
-	| X -> print_string "X's turn to play.\n"
+	| _ -> print_string "X's turn to play.\n"
 	end;
 	let input = get_input () in
 	let new_board = place_board board pl input in
@@ -56,10 +71,25 @@ let rec main board pl =
 			print_char '\n';
 			print_board new_board;
 			print_char '\n';
+
+			if checkGameOver new_board != E
+			then begin
+				match checkGameOver new_board with
+					| X -> print_endline "X wins";
+					| O -> print_endline "O wins";
+					| _ -> print_endline "Stalemate";
+					if yesNo () = "Y"
+					then
+						newGame ()
+					else
+						exit 0
+			end
+			else
+
 			main new_board (if pl = O then X else O)
 		end
 
-let () =
+and newGame () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
 	let (name1, name2) = new_menu () in
@@ -68,4 +98,6 @@ let () =
 	if name1 = "IA"
 	then iaMain board O
 	else main board O
-	()
+
+let () =
+	newGame ()

@@ -1,6 +1,7 @@
 open InputParser
 open TalonStuff
 open TicTac
+open Menu
 
 let place_map token pos map =
 		match token with
@@ -61,9 +62,10 @@ let rec main board pl =
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in
+	let (name1, name2) = new_menu () in
 	print_board board;
 	print_char '\n';
-	if Array.length Sys.argv > 1 && Sys.argv.(1) = "ia"
+	if name1 = "IA"
 	then iaMain board O
 	else main board O
 	()

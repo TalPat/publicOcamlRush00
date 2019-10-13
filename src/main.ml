@@ -37,6 +37,32 @@ let rec iaMain board pl =
 			iaMain new_board (if pl = O then X else O)
 		end
 
+let rec main board pl =
+	begin
+	match pl with
+	| O -> print_string "O's turn to play.\n"
+	| X -> print_string "X's turn to play.\n"
+	end;
+	let input =
+		if pl = X
+		then get_input () 
+		else placeToken (pl, 0) board
+	in
+	let new_board = place_board board pl input in
+	if (board = new_board) then
+		begin	
+			print_string "Invalid placement\n";
+			iaMain board pl
+		end
+	else
+		begin
+			let new_board = checkBoard new_board in
+			print_char '\n';
+			print_board new_board;
+			print_char '\n';
+			iaMain new_board (if pl = O then X else O)
+		end
+
 let rec main board pl (name1, name2)=
 	begin
 	match pl with
@@ -52,12 +78,13 @@ let rec main board pl (name1, name2)=
 		end
 	else
 		begin
-			checkBoard new_board;
+			let new_board = checkBoard new_board in
 			print_char '\n';
 			print_board new_board;
 			print_char '\n';
 			main new_board (if pl = O then X else O) (name1, name2)
 		end
+
 let () =
 	let new_map = [E; E; E; E; E; E; E; E; E] in
 	let board = [new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map; new_map] in

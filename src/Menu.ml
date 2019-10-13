@@ -30,3 +30,15 @@ let new_menu () =
       loop (read_line())
       end in
   loop (read_line())
+
+  let yesNo () =
+    print_string "|----------Play Another-----------|\n Select an option:\n  1)  Yes (Y)\n  1)  No (N)\n            " ;
+    let rec loop input =
+      if (input = "Y" || input = "N" ) then
+        input
+      else
+        begin
+        print_string ("Please type either (Y) or (N)\n            ");
+        loop (read_line())
+        end in
+    loop (read_line())

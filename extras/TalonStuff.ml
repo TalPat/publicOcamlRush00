@@ -112,21 +112,25 @@ let preventWin l tok =
 	aux tok winCon
 
 let setupWin l tok =
-	if (List.nth l 2 = tok && List.nth l 6 = tok && List.nth l 1 = E && List.nth l 3 = E) ||
+	if  List.nth l 0 = E && (
+		(List.nth l 2 = tok && List.nth l 6 = tok && List.nth l 1 = E && List.nth l 3 = E) ||
 		(List.nth l 2 = tok && List.nth l 8 = tok && List.nth l 1 = E && List.nth l 4 = E) ||
-		(List.nth l 6 = tok && List.nth l 8 = tok && List.nth l 3 = E && List.nth l 4 = E)
+		(List.nth l 6 = tok && List.nth l 8 = tok && List.nth l 3 = E && List.nth l 4 = E))
 	then 0
-	else if (List.nth l 2 = tok && List.nth l 6 = tok && List.nth l 5 = E && List.nth l 7 = E) ||
+	else if  List.nth l 8 = E && (
+		(List.nth l 2 = tok && List.nth l 6 = tok && List.nth l 5 = E && List.nth l 7 = E) ||
 		(List.nth l 2 = tok && List.nth l 0 = tok && List.nth l 5 = E && List.nth l 4 = E) ||
-		(List.nth l 6 = tok && List.nth l 0 = tok && List.nth l 7 = E && List.nth l 4 = E)
+		(List.nth l 6 = tok && List.nth l 0 = tok && List.nth l 7 = E && List.nth l 4 = E))
 	then 8
-	else if (List.nth l 0 = tok && List.nth l 8 = tok && List.nth l 1 = E && List.nth l 5 = E) ||
+	else if  List.nth l 2 = E && (
+	(List.nth l 0 = tok && List.nth l 8 = tok && List.nth l 1 = E && List.nth l 5 = E) ||
 	(List.nth l 0 = tok && List.nth l 6 = tok && List.nth l 1 = E && List.nth l 4 = E) ||
-	(List.nth l 8 = tok && List.nth l 6 = tok && List.nth l 5 = E && List.nth l 4 = E)
+	(List.nth l 8 = tok && List.nth l 6 = tok && List.nth l 5 = E && List.nth l 4 = E))
 	then 2
-	else if (List.nth l 0 = tok && List.nth l 8 = tok && List.nth l 3 = E && List.nth l 7 = E) ||
+	else if  List.nth l 6 = E && (
+		(List.nth l 0 = tok && List.nth l 8 = tok && List.nth l 3 = E && List.nth l 7 = E) ||
 		(List.nth l 0 = tok && List.nth l 2 = tok && List.nth l 3 = E && List.nth l 4 = E) ||
-		(List.nth l 8 = tok && List.nth l 2 = tok && List.nth l 7 = E && List.nth l 4 = E)
+		(List.nth l 8 = tok && List.nth l 2 = tok && List.nth l 7 = E && List.nth l 4 = E))
 	then 6
 	else (-1)
 
@@ -160,4 +164,5 @@ let findTarget l tok =
 let placeToken ia b =
 	let targetMap = findTarget (List.nth b 9) (get_1_2 ia) in
 	let targetPoint = findTarget (List.nth b targetMap) (get_1_2 ia) in
+	print_endline (string_of_int (targetMap+1) ^ " " ^ string_of_int (targetPoint+1));
 	(targetMap+1, targetPoint+1)
